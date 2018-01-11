@@ -36,4 +36,6 @@
 
     - name: Apply System Config
       command: sysctl --system
-        
+
+    - name: Disable Swap
+      command: swapoff -a

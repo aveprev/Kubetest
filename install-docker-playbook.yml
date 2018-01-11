@@ -1,0 +1,17 @@
+- hosts: all
+  remote_user: root
+  become: yes
+  tasks:
+    - name: Enable Docker CE Repository
+      yum_repository:
+        name: docker-ce-stable
+        description: Docker CE Stable
+        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
+        gpgkey: https://download.docker.com/linux/centos/gpg
+        state: present
+        
+    - name: Install Docker CE
+      yum: name=docker-ce state=installed
+      
+    - name: Enable Docker Service
+      service: name=docker state=started

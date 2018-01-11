@@ -14,4 +14,4 @@
       yum: name=docker-ce state=installed
       
     - name: Enable Docker Service
-      service: name=docker state=started
+      service: name=docker state=started enabled=true

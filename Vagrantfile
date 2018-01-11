@@ -6,6 +6,10 @@ Vagrant.configure("2") do |config|
       node.vm.provision "ansible" do |ansible|
         ansible.playbook = "install-docker-playbook.yml"
       end
+
+      node.vm.provision "ansible" do |ansible|
+        ansible.playbook = "install-kubernetes-playbook.yml"
+      end
     end
   end
 end

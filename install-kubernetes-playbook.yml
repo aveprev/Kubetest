@@ -1,0 +1,23 @@
+- hosts: all
+  remote_user: root
+  become: yes
+  tasks:
+    - name: Enable Kubernetes Repository
+      yum_repository:
+        name: kubernetes
+        description: Kubernetes
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+        state: present
+        
+    - name: Install Kubelet
+      yum: name=kubelet state=installed
+
+    - name: Install Kubeadm
+      yum: name=kubeadm state=installed
+
+    - name: Install Kubectl
+      yum: name=kubectl state=installed
+      
+    - name: Enable Kubelet Service
+      service: name=kubelet state=started enabled=true

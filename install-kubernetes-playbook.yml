@@ -21,3 +21,19 @@
       
     - name: Enable Kubelet Service
       service: name=kubelet state=started enabled=true
+
+    - name: Enable Iptables in Sys Config
+      lineinfile:
+        path: /etc/sysctl.d/k8s.conf
+        line: "net.bridge.bridge-nf-call-iptables = 1"
+        create: yes
+
+    - name: Enable Ip6tables in System Config
+      lineinfile:
+        path: /etc/sysctl.d/k8s.conf
+        line: "net.bridge.bridge-nf-call-ip6tables = 1"
+        create: yes
+
+    - name: Apply System Config
+      command: sysctl --system
+        

@@ -39,3 +39,12 @@
 
     - name: Disable Swap
       command: swapoff -a
+
+    - name: Configure Cgroup Driver
+      lineinfile:
+        path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+        regexp: "\"KUBELET_CGROUP_ARGS=.*\""
+        line: "Environment=\"KUBELET_CGROUP_ARGS=--cgroup-driver=cgroupfs\""
+
+    - name: Reload Systemd Configs
+      command: systemctl daemon-reload
